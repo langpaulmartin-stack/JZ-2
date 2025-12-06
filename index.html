@@ -323,6 +323,41 @@
 </section>
 
 
+<!-- Cookie lišta -->
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Nastavení cookies" aria-modal="false" aria-hidden="true">
+  <div class="cookie-banner__inner">
+    <div class="cookie-banner__copy">
+      <p class="cookie-banner__title">Cookies</p>
+      <p class="cookie-banner__lead">
+        Používáme nezbytné cookies pro správný chod webu. Analytické cookies spouštíme jen se souhlasem a lze je kdykoli změnit v nastavení.
+      </p>
+    </div>
+    <div class="cookie-banner__actions" aria-label="Hlavní volba cookies">
+      <button class="btn" id="cookieAcceptAll">Souhlasím se vším</button>
+      <button class="btn btn--outline" id="cookieReject">Pouze nezbytné</button>
+      <button class="cookie-link" id="cookieOpenSettings" type="button">Nastavení</button>
+    </div>
+  </div>
+
+  <div class="cookie-banner__settings" id="cookieSettings" hidden>
+    <p class="cookie-banner__title">Detailní nastavení</p>
+    <div class="cookie-banner__toggles" role="group" aria-label="Kategorie cookies">
+      <label>
+        <input type="checkbox" checked disabled>
+        Nezbytné cookies (vždy zapnuté)
+      </label>
+      <label>
+        <input type="checkbox" id="consentAnalytics">
+        Analytické cookies (měření návštěvnosti)
+      </label>
+    </div>
+    <div class="cookie-banner__actions cookie-banner__actions--settings">
+      <button class="btn" id="cookieSaveSettings">Uložit volbu</button>
+      <button class="btn btn--outline" id="cookieBack">Zpět</button>
+    </div>
+  </div>
+</div>
+
 
 <footer id="kontakt" class="footer">
   <div class="container footer__cols">
@@ -339,14 +374,101 @@
     </div>
     <div>
       <div><strong>Odkazy</strong></div>
-      <div class="mt-2">© <span id="year"></span> 
+      <div class="mt-2">
+        <a href="podporte-nas.html">Podpořte nás</a>
+      </div>
+
+      <div class="mt-2">
+        <a href="#nastaveni-cookies" class="cookie-manage" data-open-cookie-settings>Nastavení cookies</a>
+      </div>
+            <div class="mt-2">© <span id="year"></span> 
         <a href="https://www.martinlangpaul.cz" target="_blank" rel="noopener">
           Martin Langpaul
         </a>
       </div>
     </div>
   </div>
+  
 </footer>
+
+<!-- Cookie consent JS -->
+<script>
+(function(){
+  const KEY = 'jzrzavy-cookie-consent';
+  const banner = document.getElementById('cookieBanner');
+  const settingsPanel = document.getElementById('cookieSettings');
+  const btnAccept = document.getElementById('cookieAcceptAll');
+  const btnReject = document.getElementById('cookieReject');
+  const btnOpenSettings = document.getElementById('cookieOpenSettings');
+  const btnSaveSettings = document.getElementById('cookieSaveSettings');
+  const btnBack = document.getElementById('cookieBack');
+  const analyticsToggle = document.getElementById('consentAnalytics');
+  const manageButtons = document.querySelectorAll('[data-open-cookie-settings]');
+  if(!banner) return;
+
+  const defaultPrefs = { necessary: true, analytics: false };
+
+  function getPrefs(){
+    try{
+      const raw = localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(err){
+      return null;
+    }
+  }
+  function savePrefs(prefs){
+    localStorage.setItem(KEY, JSON.stringify(prefs));
+  }
+  function applyPrefs(prefs){
+    document.documentElement.dataset.analyticsConsent = prefs.analytics ? 'granted' : 'denied';
+  }
+
+  function showBanner(){
+    banner.classList.add('is-visible');
+    banner.setAttribute('aria-hidden','false');
+  }
+  function hideBanner(){
+    banner.classList.remove('is-visible','show-settings');
+    settingsPanel.hidden = true;
+    banner.setAttribute('aria-hidden','true');
+  }
+  function openSettings(){
+    const prefs = getPrefs() || defaultPrefs;
+    analyticsToggle.checked = !!prefs.analytics;
+    banner.classList.add('is-visible','show-settings');
+    settingsPanel.hidden = false;
+    banner.setAttribute('aria-hidden','false');
+  }
+  function closeSettings(){
+    banner.classList.remove('show-settings');
+    settingsPanel.hidden = true;
+    if(getPrefs()){ hideBanner(); }
+  }
+  function handleChoice(prefs){
+    savePrefs(prefs);
+    applyPrefs(prefs);
+    hideBanner();
+  }
+
+  btnAccept?.addEventListener('click', ()=> handleChoice({ necessary:true, analytics:true }));
+  btnReject?.addEventListener('click', ()=> handleChoice({ necessary:true, analytics:false }));
+  btnOpenSettings?.addEventListener('click', openSettings);
+  btnSaveSettings?.addEventListener('click', ()=> handleChoice({ necessary:true, analytics: !!analyticsToggle.checked }));
+  btnBack?.addEventListener('click', closeSettings);
+  manageButtons.forEach(btn => btn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    openSettings();
+  }));
+
+  const stored = getPrefs();
+  if(stored){
+    applyPrefs(stored);
+    hideBanner();
+  }else{
+    showBanner();
+  }
+})();
+</script>
 
  <!-- ✅ OPRAVENÝ HERO SLIDER SCRIPT -->
 <script>

@@ -410,3 +410,110 @@ a:hover{ color: var(--brand-600); text-decoration: underline; }
   margin-bottom:.35rem; 
   margin-top:.6rem;     /* ← přidané odsazení */
 }
+
+/* === Cookie lišta === */
+.cookie-banner{
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: min(var(--container), calc(100% - 24px));
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  z-index: 2000;
+  display: none;
+}
+.cookie-banner.is-visible{ display:block; animation: cookieFade .25s ease; }
+.cookie-banner__inner{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 14px;
+}
+.cookie-banner__title{ margin:0 0 6px; font-weight:700; color: var(--brand-900); }
+.cookie-banner__lead{ margin:0; color: var(--muted); }
+.cookie-banner__actions{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content:flex-end;
+}
+.cookie-link{
+  background:none;
+  border:none;
+  color: var(--brand-700);
+  font-weight:600;
+  cursor:pointer;
+  padding: 8px 0;
+  text-decoration: none;
+}
+.cookie-link:hover{
+  color: var(--brand-900);
+  text-decoration: none;
+}
+.cookie-manage{
+  background:none;
+  border:none;
+  color: inherit;
+  font-weight: inherit;
+  cursor:pointer;
+  padding: 0;
+  text-decoration: none;
+}
+.cookie-manage:hover{
+  color: inherit;
+  text-decoration: none;
+}
+.cookie-banner__settings{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: none;
+}
+.cookie-banner.show-settings .cookie-banner__settings{ display:block; }
+.cookie-banner.show-settings .cookie-banner__inner{ display:none; }
+.cookie-banner__toggles label{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  margin: 6px 0;
+  color: var(--text);
+}
+.cookie-banner__toggles input{ width:18px; height:18px; }
+.cookie-banner__actions--settings{ justify-content:flex-start; }
+
+@keyframes cookieFade{
+  from{ opacity:0; transform: translate(-50%, 12px); }
+  to{ opacity:1; transform: translate(-50%, 0); }
+}
+
+@media (max-width: 720px){
+  .cookie-banner{
+    left: 12px;
+    right: 12px;
+    transform: none;
+    width: auto;
+    padding: 14px;
+  }
+  .cookie-banner__inner{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cookie-banner__actions{
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .cookie-banner__actions .btn{
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
+  @keyframes cookieFade{
+    from{ opacity:0; transform: translateY(12px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+}
