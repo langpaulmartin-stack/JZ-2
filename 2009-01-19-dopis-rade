@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <title>Název článku – Archiv</title>
+  <meta name="description" content="Krátký popis článku." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<main class="container article">
+  <p class="meta">12. 5. 2023</p>
+  <h1>Název článku</h1>
+
+  <div class="prose">
+    <p>Text článku…</p>
+  </div>
+
+  <p><a href="/archiv/">← Zpět do archivu</a></p>
+</main>
+
+</body>
+</html>

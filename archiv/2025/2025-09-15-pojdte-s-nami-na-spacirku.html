@@ -105,28 +105,64 @@
       </nav>
     </header>
 
-    <main id="main">
-      <section class="section">
-        <div class="container article">
-          <p class="meta">18. září 2025</p>
-          <h1>Pojďte s námi na 16. Jeníkovu špacírku!</h1>
+<main id="main">
+  <section class="section">
+    <div class="container">
 
-          <div class="breadcrumbs">
-            <a href="../../">Úvod</a>
-            <span>•</span>
-            <a href="../../aktuality.html">Aktuality</a>
-            <span>•</span>
-            <span>Pojďte s námi na 16. Jeníkovu špacírku!</span>
+      <article class="post">
+
+        <!-- TITULEK + META ÚPLNĚ NAHOŘE -->
+        <header class="post__header">
+          <h1 class="post__title">Pojďte s námi na 16. Jeníkovu špacírku!</h1>
+
+          <div class="post__meta">
+            <time datetime="2025-09-18">18. září 2025</time>
           </div>
+        </header>
 
-          <div class="prose">
-            <p><strong>4.10.2025 to propukne!</strong> Okrouhlická anabáze, aneb srdečně zveme na další – letos šestnáctý – ročník Jeníkovy špacírky. Projděte se s námi podzimní krajinou malíře Jana Zrzavého!</p>
-          </div>
+        <!-- HERO OBRÁZEK -->
+        <figure class="post__hero">
+          <img
+            src="/JZ-images/jenikova-spacirka-2018.png"
+            alt="Podzimní krajina v okolí Okrouhlice – pozvánka na Jeníkovu špacírku"
+            loading="lazy"
+          >
+        </figure>
 
-          <p><a href="../../aktuality.html">← Zpět na Aktuality</a></p>
+        <!-- BREADCRUMBS POD HERO -->
+        <nav class="breadcrumbs" aria-label="Drobečková navigace">
+          <a href="../../index.html">Domů</a>
+          <span aria-hidden="true">›</span>
+          <a href="../../aktuality.html">Aktuality</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Pojďte s námi na 16. Jeníkovu špacírku!</span>
+        </nav>
+
+        <!-- OBSAH -->
+        <div class="post__content">
+          <p class="lead">
+            <strong>4. 10. 2025 to propukne!</strong>
+            Okrouhlická anabáze, aneb srdečně zveme na další – letos šestnáctý –
+            ročník Jeníkovy špacírky. Projděte se s námi podzimní krajinou
+            malíře Jana Zrzavého!
+          </p>
+
+          <!-- další obsah článku -->
         </div>
-      </section>
-    </main>
+
+        <!-- BUTTONY DOLE -->
+        <footer class="post__actions" aria-label="Odkazy pod článkem">
+          <a class="btn btn--outline" href="../../aktuality.html">Zpět na aktuality</a>
+          <a class="btn" href="../../podporte-nas.html">Podpořte nás</a>
+          <a class="btn btn--ghost" href="../../index.html">Homepage</a>
+        </footer>
+
+      </article>
+
+    </div>
+  </section>
+</main>
+
 
     <footer id="kontakt" class="footer">
       <div class="container footer__cols">
